@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="fragments/headTag :: head"></head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo"><img th:src="@{/img/favicon.png}" width="48px" height="48px"> Thymeleaf Layui</div>
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item layadmin-flexible" lay-unselect="">
+                <a href="javascript:;" layadmin-event="flexible" class="hideMenu" title="侧边伸缩">
+                    <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                </a>
+            </li>
+            <!--<li class="layui-nav-item"><a th:href="${radarosUrl}" target="_blank">前往监控</a></li>-->
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;" th:text="${username}"></a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" class="userinfo">个人信息</a></dd>
+                    <dd><a href="javascript:;" class="logout">退出</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:;">帮助</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-engine"></i> <cite>测试页面1</cite></a>
+                    <dl class="layui-nav-child" shiro:hasPermission="back:compute">
+                        <dd><a href="compute/collect/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>子页面1</cite></a></dd>
+                        <dd><a href="compute/split/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>子页面2</cite></a></dd>
+                        <dd><a href="compute/aggregate/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>子页面3</cite></a></dd>
+                        <dd><a href="compute/indicator/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>子页面4</cite></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-table"></i> <cite>测试页面2</cite></a>
+                    <dl class="layui-nav-child" shiro:hasPermission="back:view">
+                        <dd><a href="view/page/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>页面</cite></a></dd>
+                        <dd><a href="view/table/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>表格</cite></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-notice"></i> <cite>测试页面3</cite></a>
+                    <dl class="layui-nav-child" shiro:hasPermission="back:warning">
+                        <dd><a href="warning/template/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>报警模版</cite></a></dd>
+                        <dd><a href="warning/group/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>报警组</cite></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" shiro:hasPermission="back:security">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-user"></i> <cite>权限管理</cite></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="security/user/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>用户</cite></a></dd>
+                        <dd><a href="security/role/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>角色</cite></a></dd>
+                        <dd><a href="security/permission/list.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>资源</cite></a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" shiro:hasPermission="back:system">
+                    <a href="javascript:;"><i class="layui-icon layui-icon-set"></i> <cite>系统管理</cite></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" target="content"><i class="layui-icon layui-icon-component"></i> <cite>报警记录</cite></a></dd>
+                        <dd><a href="system/cache.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>缓存</cite></a></dd>
+                        <dd><a href="system/radarLog.do_" target="content"><i class="layui-icon layui-icon-component"></i> <cite>发送LOG</cite></a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <iframe name="content" id="content" src=""></iframe>
+    </div>
+
+    <div class="layui-footer footer">
+        © 2018 Thyleaf Layui
+    </div>
+</div>
+
+<script>
+    layui.use(['element','layer'], function(){
+
+        $ = layui.jquery;
+
+        var element = layui.element;
+        var layer = layui.layer;
+
+        $(function(){
+            $(".hideMenu").on("click",function(){
+                var oClass=$(".layui-side").hasClass("mini");
+                if(!oClass){
+                    $(".layui-side").animate({
+                        width:"50px"
+                    })
+                    $(".layui-body").animate({
+                        left:"50"
+                    })
+                    $(".layui-footer").animate({
+                        left:"50"
+                    })
+                    $("#LAY_app_flexible").removeClass("layui-icon-shrink-right");
+                    $("#LAY_app_flexible").addClass("layui-icon-spread-left");
+                }else{
+                    $(".layui-side").animate({
+                        width:"200px"
+                    })
+                    $(".layui-body").animate({
+                        left:"200"
+                    })
+                    $(".layui-footer").animate({
+                        left:"200"
+                    })
+                    $("#LAY_app_flexible").removeClass("layui-icon-spread-left");
+                    $("#LAY_app_flexible").addClass("layui-icon-shrink-right");
+                }
+                $(".layui-side").toggleClass("mini");
+            });
+            //mini 模式下添加 tips
+            $('.layui-nav-tree a').hover(function(){
+                if($(".layui-side").hasClass('mini')){
+                    var tipText = $(this).find('cite').text();
+                    layer.tips(tipText, this);
+                }
+            },function(){
+                layer.closeAll('tips');
+            });
+
+            $(".userinfo").on("click",function(){
+                layer.open({
+                    type: 2 //Page层类型
+                    ,skin: 'layui-layer-molv'
+                    ,area: ['500px', '455px']
+                    ,title: ['个人信息','font-size:18px']
+                    ,shadeClose: true
+                    ,maxmin: true //允许全屏最小化
+                    ,content:'security/user/info.do_'
+                });
+            });
+
+            $(".logout").on("click",function(){
+                $.ajax({
+                    url:'logout.do_',
+                    type:'post',
+                    dataType:'json',
+                    success:function(data){
+                        if(data.code == 200){
+                            location.href="index";
+                        }else{
+                            layer.msg(data.msg,{time:1000});
+                        }
+                    }
+                });
+            });
+        });
+
+    });
+</script>
+</body>
+</html>

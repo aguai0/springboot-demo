@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping("/demoController")
+@RequestMapping("/demo")
 public class DemoController {
 
     /*@Autowired
