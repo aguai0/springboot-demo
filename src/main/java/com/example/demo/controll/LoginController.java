@@ -2,70 +2,65 @@ package com.example.demo.controll;
 
 import com.example.demo.base.Result;
 import com.example.demo.domain.User;
-import com.example.demo.repository.UserRepository;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.concurrent.ConcurrentMap;
 
 @Controller
 public class LoginController {
-
+    /** 日志记录器 */
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
     @Autowired
     UserRepository userRepository;
 
-    @RequestMapping("/login")
-    public ModelAndView login(Model model){
-        model.addAttribute("title", "登录页面");
-        return new ModelAndView("login", "userModel", model);
+    @RequestMapping({"/","/login"})
+    public String index(){
+        return"/login";
     }
 
-    @RequestMapping("/userLogin")
+    @RequestMapping("/login.do_")
     @ResponseBody
-    public Result userLogin( User user){
-        user = userRepository.login(user);
-        if(user==null){
-            return Result.fail();
-        }
-        return Result.succeed(user);
-    }
+    public Result doLogin(User user){
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), user.getPassword());
 
-    @RequestMapping("/main")
-    public ModelAndView main(Model model,String userName){
-        model.addAttribute("title", "主页面");
-        model.addAttribute("username",userName);
-        return new ModelAndView("main", "userModel", model);
+        Subject subject = SecurityUtils.getSubject();
+
+        try {
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            LOGGER.error(e.getMessage(),e);
+            return Result.fail(403,"用户名或密码错误");
+        }
+
+        return Result.succeed();
     }
 
     @RequestMapping("/checkUser")
     @ResponseBody
     public Result checkUser(String user){
-        if(userRepository.checkUser(user)){
+        ConcurrentMap<String, String> map = userRepository.checkUser(user);
+        if(map!=null){
             return Result.succeed();
         }else {
             return Result.fail();
         }
     }
 
-    @RequestMapping("/back")
-    public ModelAndView back(Model model){
-        model.addAttribute("title", "主页面");
-        return new ModelAndView("back", "userModel", model);
-    }
-
-    @RequestMapping("/toRegister")
-    public String toRegister(){
-        return "register";
-    }
-
-
-    @RequestMapping("/doRegister")
+    @RequestMapping("/logout.do_")
     @ResponseBody
-    public Result register(String name,String password){
-
-        userRepository.register(new User(name,password));
+    public Result doLogout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
         return Result.succeed();
     }
+
 }

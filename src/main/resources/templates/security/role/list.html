@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="fragments/headTag :: head"></head>
+<body class="child-body">
+
+<table class="layui-table" lay-size="sm" lay-filter="list">
+    <thead>
+    <tr>
+        <th lay-data="{field:'roleCode'}">角色编码</th>
+        <th lay-data="{field:'roleName'}">角色名称</th>
+        <th lay-data="{field:'permission'}">权限</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item:${list}">
+        <td th:text="${item.roleCode}"></td>
+        <td th:text="${item.roleName}"></td>
+        <td th:text="${item.permission}"></td>
+    </tr>
+    </tbody>
+</table>
+<div id="pag"></div>
+
+<script type="text/javascript">
+    layui.use(['element','laypage','table','form'], function(){
+
+        $ = layui.jquery;
+
+    });
+</script>
+</body>
+</html>

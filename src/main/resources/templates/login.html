@@ -44,14 +44,13 @@
         var $ = layui.jquery;
         form.on('submit(login)',function (data) {
             $.ajax({
-                url:'userLogin',
+                url:'login.do_',
                 data:data.field,
                 dataType:'json',
                 type:'post',
                 success:function (data) {
                     if (data.code == 200){
-                        var userName = data.data.name;
-                        location.href = "main?userName="+userName;
+                        location.href = "index";
                     }else{
                         layer.msg('登录名或密码错误');
                     }

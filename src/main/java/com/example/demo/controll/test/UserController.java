@@ -1,7 +1,6 @@
-package com.example.demo.controll;
+package com.example.demo.controll.test;
 
 import com.example.demo.domain.User;
-import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

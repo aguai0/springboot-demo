@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="fragments/headTag :: head"></head>
+<body class="child-body">
+
+<div class="layui-row">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <a href="javascript:void(0)" type="button" id="add" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe608;</i>新增</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<table class="layui-table" lay-size="sm" lay-filter="list">
+    <thead>
+    <tr>
+        <th lay-data="{field:'resourceCode'}">资源编码</th>
+        <th lay-data="{field:'resourceName'}">资源名称</th>
+        <th lay-data="{field:'permissionCode'}">权限标识</th>
+        <th lay-data="{field:'parentCode'}">上级编码</th>
+        <th lay-data="{field:'resourceType'}">资源类型</th>
+        <th lay-data="{field:'resourceUrl'}">链接地址</th>
+        <th lay-data="{field:'status'}">状态</th>
+        <th lay-data="{field:'modifyTime'}">修改时间</th>
+        <th lay-data="{field:'modifyName'}">修改者</th>
+        <th lay-data="{field:'opt',fixed: 'right',align:'center',width:300}">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item:${list}">
+        <td th:text="${item.resourceCode}"></td>
+        <td th:text="${item.resourceName}"></td>
+        <td th:text="${item.permissionCode}"></td>
+        <td th:text="${item.parentCode}"></td>
+        <div th:switch="${item.resourceType}">
+            <td th:case="menu">菜单</td>
+            <td th:case="button">按钮</td>
+        </div>
+        <td th:text="${item.resourceUrl}"></td>
+        <div th:switch="${item.status}">
+            <td th:case="1">有效</td>
+            <td th:case="0">无效</td>
+            <td th:case="-1">已删除</td>
+        </div>
+        <td th:text="${#dates.format(item.modifyTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${item.modifyName}"></td>
+        <td>
+            <a class="layui-btn layui-btn-xs alt" th:attr="data-id=${item.id}" href="javascript:void(0);"><i class="layui-icon">&#xe642;</i>编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs remove" th:attr="data-id=${item.id}" href="javascript:void(0);"><i class="layui-icon">&#xe640;</i>删除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div id="pag"></div>
+
+<script type="text/javascript">
+    layui.use(['element','laypage','table','form'], function(){
+
+        $ = layui.jquery;
+
+        //新增
+        $('#add').on('click',function () {
+            layer.open({
+                type: 2 //Page层类型
+                ,skin: 'layui-layer-molv'
+                ,area: ['600px', '655px']
+                ,title: ['资源信息','font-size:18px']
+                ,shadeClose: true
+                ,maxmin: true //允许全屏最小化
+                ,content:'edit.do_'
+            });
+        });
+
+        //修改
+        $('.alt').on('click',function () {
+            var _this = $(this);
+            layer.open({
+                type: 2 //Page层类型
+                ,skin: 'layui-layer-molv'
+                ,area: ['600px', '655px']
+                ,title: ['资源信息','font-size:18px']
+                ,shadeClose: true
+                ,maxmin: true //允许全屏最小化
+                ,content:'edit.do_?id='+_this.data('id')
+            });
+        });
+
+        //删除
+        $(".remove").on('click', function () {
+            var _this = $(this);
+            layer.confirm('确定删除吗?',{title:'删除'}, function(){
+                $.getJSON('del.do_', {id:_this.data('id')}, function(ret){
+                    if (ret.code == 200){
+                        $('#'+_this.data('id')).hide();
+                        layer.msg(ret.msg, {icon: 1,time:600},function () {
+                            location.reload();
+                        });
+                    } else {
+                        layer.msg(ret.msg, {icon: 2,time:600});
+                    }
+                });
+            });
+        })
+
+    });
+</script>
+</body>
+</html>

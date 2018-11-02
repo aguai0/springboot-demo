@@ -1,4 +1,4 @@
-package com.example.demo.controll;
+package com.example.demo.controll.test;
 
 import com.example.demo.base.Result;
 import org.springframework.web.bind.annotation.RequestMapping;

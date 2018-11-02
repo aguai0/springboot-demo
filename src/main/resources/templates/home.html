@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headTag :: head"></head>
+<body class="child-body">
+
+<blockquote class="layui-elem-quote">
+    <p>home 页面</p>
+</blockquote>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>演示</legend>
+</fieldset>
+<ul class="layui-timeline">
+    <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+            <h4 class="layui-timeline-title">演示</h4>
+            <p>演示的规则。</p>
+        </div>
+    </li>
+    <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+            <h4 class="layui-timeline-title">切分</h4>
+            <p>对采集点采集的数据进行切分，切字段命名，标识数据类型，并可配置映射函数进行数据转换。</p>
+        </div>
+    </li>
+    <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+            <h4 class="layui-timeline-title">聚合</h4>
+            <p>对数据进行挑选、分类、归纳、计算和汇总，形成聚合事实数据。</p>
+            <p>通过对切分数据配置维度列、计算类型（包括count、sum、avg、max、min等）和计算列来完成规则配置，并可通过规则过滤要聚合的数据。</p>
+        </div>
+    </li>
+    <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+            <h4 class="layui-timeline-title">演示</h4>
+            <p>演示1111111111111111111</p>
+            <p>演示2222222222222222222</p>
+        </div>
+    </li>
+</ul>
+
+</body>
+</html>

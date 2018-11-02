@@ -72,6 +72,13 @@
         <!-- thymeleaf end-->
 
         <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
+
+        <!-- begin 前端layui -->
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>
             <version>0.34</version>
@@ -107,7 +114,9 @@
             <artifactId>echarts</artifactId>
             <version>4.0.4</version>
         </dependency>
+        <!-- end layui-->
 
+        <!-- begin权限shiro-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
@@ -123,10 +132,51 @@
             <artifactId>thymeleaf-extras-shiro</artifactId>
             <version>2.0.0</version>
         </dependency>
+        <!-- end权限shiro-->
+
+        <!-- begin mysql mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <!--<scope>runtime</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- end mysql mybatis -->
 
     </dependencies>
 
 	<build>
+
+<!--        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>bootstrap-test.properties</exclude>
+                    <exclude>bootstrap-dev.properties</exclude>
+                    <exclude>bootstrap-pro.properties</exclude>
+                    <exclude>bootstrap.properties</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>bootstrap-${env}.properties</include>
+                    <include>bootstrap.properties</include>
+                </includes>
+            </resource>
+        </resources>-->
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
