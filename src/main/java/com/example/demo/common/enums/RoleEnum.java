@@ -7,8 +7,8 @@ public enum RoleEnum {
 
     common ("common", "一般用户", "index:homePage"),
     index_admin("index_admin", "前台管理员", "index:homePage,index:home"),
-    back_admin ("back_admin", "后台管理员", "index:homePage,index:home,radar:back,back:compute,back:view,back:warning"),
-    super_admin("super_admin", "超级管理员", "index:homePage,index:home,radar:back,back:compute,back:view,back:warning,back:security,back:system,back:check"),
+    back_admin ("back_admin", "后台管理员", "index:homePage,index:home,demo:back,back:compute,back:view,back:warning"),
+    super_admin("super_admin", "超级管理员", "index:homePage,index:home,demo:back,back:compute,back:view,back:warning,back:security,back:system,back:check"),
 
     ;
 

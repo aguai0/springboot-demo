@@ -65,8 +65,4 @@ public class RoleVO extends BaseVO {
     public void setStatus(Integer status) {
         this.status = status;
     }
-
-    //t_radar_security_r_user_role
-    //t_radar_security_r_role_resource
-
 }
