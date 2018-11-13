@@ -3,11 +3,6 @@ package com.example.demo.service.security;
 import com.example.demo.domain.security.UserPermissionPO;
 import com.example.demo.domain.security.UserVO;
 
-/**
- * @author: hxy
- * @description: 登录Service
- * @date: 2017/10/24 11:02
- */
 public interface LoginService {
 
     /**

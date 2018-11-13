@@ -1,9 +1,6 @@
 package com.example.demo.common.enums;
 
-/**
- * @author: hxy
- * @date: 2017/10/24 10:16
- */
+
 public enum ErrorEnum {
     /*
      * 错误信息
