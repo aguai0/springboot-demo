@@ -1,18 +1,17 @@
-package com.example.demo.service.impl.security;
+package com.example.demo.service.security.impl;
 
-import com.example.demo.common.enums.RoleEnum;
 import com.example.demo.common.enums.StatusEnum;
 import com.example.demo.dao.security.UserDAO;
 import com.example.demo.domain.security.UserVO;
 import com.example.demo.service.security.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -30,18 +29,17 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public UserVO findByEmail(String email) {
-        UserVO user = userDAO.findByEmail(email);
-        return user;
+    public UserVO findByUserName(String userName) {
+        return userDAO.findByUserName(userName);
     }
 
     public void add(String email) {
         UserVO user = getDefaultUser(email);
-        if (email.contains("admin")) {
+        /*if (email.contains("admin")) {
             user.setRoles(RoleEnum.super_admin.getRoleCode());
         } else {
             user.setRoles(RoleEnum.index_admin.getRoleCode());
-        }
+        }*/
         this.add(user);
     }
 
@@ -66,20 +64,20 @@ public class UserServiceImpl implements UserService {
 
         Set<String> set = new HashSet<>();
 
-        UserVO user = userDAO.findByEmail(email);
+       /* UserVO user = userDAO.findByEmail(email);
         String roles = user.getRoles();
 
         if (StringUtils.isNotBlank(roles)) {
             String[] roleCodes = roles.split(",");
             for (String roleCode : roleCodes) {
-//                RoleVO role =roleDAO.findByCode(roleCode);
-//                String pemissions = role.getPermissions();
+                RoleVO role =roleDAO.findByCode(roleCode);
+                String pemissions = role.getPermissions();
                 String pemissions = RoleEnum.getPermissionByRoleCode(roleCode);
                 if (StringUtils.isNotBlank(pemissions)) {
                     set.addAll(Arrays.asList(pemissions.split(",")));
                 }
             }
-        }
+        }*/
 
         return set;
     }

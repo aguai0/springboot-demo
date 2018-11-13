@@ -1,18 +1,45 @@
 package com.example.demo.dao.security;
 
-
 import com.example.demo.domain.security.PermissionVO;
+import com.example.demo.domain.security.UserPermissionPO;
 
 import java.util.List;
+import java.util.Set;
 
-public interface PermissionDAO {
+/**
+ * @author: hxy
+ * @date: 2017/10/30 13:28
+ */
+public interface PermissionDao {
+    /**
+     * 查询用户的角色 菜单 权限
+     *
+     * @param username
+     * @return
+     */
+    UserPermissionPO getUserPermission(String username);
 
-    List<PermissionVO> findList(PermissionVO record);
+    /**
+     * 查询所有的菜单
+     *
+     * @return
+     */
+    Set<String> getAllMenu();
 
-    void insert(PermissionVO record);
+    /**
+     * 查询所有的权限
+     *
+     * @return
+     */
+    Set<String> getAllPermission();
 
-    int updateById(PermissionVO record);
+    PermissionVO queryById(long id);
 
-    PermissionVO findById(Long id) ;
+    void save(PermissionVO permission);
 
+    void update(PermissionVO permission);
+
+    void delete(long id);
+
+    List<PermissionVO> getList(PermissionVO permission);
 }

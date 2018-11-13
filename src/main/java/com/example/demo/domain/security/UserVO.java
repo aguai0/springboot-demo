@@ -1,7 +1,6 @@
 package com.example.demo.domain.security;
 
 import com.example.demo.base.BaseVO;
-import com.example.demo.common.enums.RoleEnum;
 
 /**
  * Description: 用户
@@ -10,12 +9,12 @@ public class UserVO extends BaseVO {
 
     private Long id;
 
+    private String userName;
     private String email;
-    private String name;
+    private String nickName;
     private String mobile;
     private String password;
-
-    private String roles;
+    private Integer roleId;
 
     private Integer status;
 
@@ -35,14 +34,6 @@ public class UserVO extends BaseVO {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getMobile() {
         return mobile;
     }
@@ -51,13 +42,6 @@ public class UserVO extends BaseVO {
         this.mobile = mobile;
     }
 
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
 
     public Integer getStatus() {
         return status;
@@ -75,13 +59,27 @@ public class UserVO extends BaseVO {
         this.password = password;
     }
 
-    public String getRoleDesc () {
-        RoleEnum e = RoleEnum.of(this.roles);
-        if (e != null) {
-            return e.getRoleName();
-        } else {
-            return "";
-        }
+    public Integer getRoleId() {
+        return roleId;
     }
 
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 }

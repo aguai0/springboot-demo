@@ -2,7 +2,6 @@ package com.example.demo.controll.security;
 
 import com.example.demo.base.Pageable;
 import com.example.demo.base.Result;
-import com.example.demo.common.constants.SysConstant;
 import com.example.demo.common.enums.RoleEnum;
 import com.example.demo.domain.security.UserVO;
 import com.example.demo.service.security.UserService;
@@ -32,9 +31,9 @@ public class UserController {
     @RequestMapping("/info.do_")
     public String info (Model model) {
 
-        String email = SecurityUtils.getSubject().getPrincipal() + SysConstant.emailFix;
+        String email = (String) SecurityUtils.getSubject().getPrincipal();
 
-        UserVO user = userService.findByEmail(email);
+        UserVO user = userService.findByUserName(email);
 
         model.addAttribute("user", user);
 
@@ -65,7 +64,7 @@ public class UserController {
         UserVO user = new UserVO();
 
         if(StringUtils.isNotBlank(email)){
-            user = userService.findByEmail(email);
+            user = userService.findByUserName(email);
         }
         model.addAttribute("user", user);
         model.addAttribute("roles", RoleEnum.values());

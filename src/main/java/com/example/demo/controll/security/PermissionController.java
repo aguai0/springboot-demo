@@ -2,7 +2,6 @@ package com.example.demo.controll.security;
 
 
 import com.example.demo.base.Result;
-import com.example.demo.common.enums.ResourceTypeEnum;
 import com.example.demo.domain.security.PermissionVO;
 import com.example.demo.service.security.PermissionService;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +37,7 @@ public class PermissionController {
     public String edit (Model model, String id) {
 
         PermissionVO permission = new PermissionVO();
-        permission.setResourceType(ResourceTypeEnum.MEMU.getName());
+       // permission.setResourceType(ResourceTypeEnum.MEMU.getName());
 
         if(StringUtils.isNotBlank(id)){
             permission = permissionService.findById(Long.parseLong(id));

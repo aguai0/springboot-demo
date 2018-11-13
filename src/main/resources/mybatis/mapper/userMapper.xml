@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.neo.mapper.UserMapper" >
-    <resultMap id="BaseResultMap" type="com.neo.entity.UserEntity" >
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="userName" property="userName" jdbcType="VARCHAR" />
-        <result column="passWord" property="passWord" jdbcType="VARCHAR" />
-        <result column="user_sex" property="userSex" javaType="com.neo.enums.UserSexEnum"/>
-        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+<mapper namespace="com.example.demo.dao.security.UserDAO" >
+    <resultMap id="BaseResultMap" type="com.example.demo.domain.security.UserVO" >
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName" />
+        <result column="password" property="password" />
+        <result column="nick_name" property="nickName" />
+        <result column="role_id" property="roleId" />
+        <result column="status" property="status" />
+        <result column="mobile" property="mobile"/>
+        <result column="email" property="email"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_name" property="createName"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="modify_name" property="modifyName"/>
     </resultMap>
     
     <sql id="Base_Column_List" >
-        id, userName, passWord, user_sex, nick_name
+          id,user_name,PASSWORD,nick_name,role_id,create_time,update_time,STATUS,mobile,email,create_name,modify_name
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap"  >
@@ -22,32 +29,44 @@
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap" >
         SELECT 
        <include refid="Base_Column_List" />
-	   FROM users
+	   FROM sys_user
 	   WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.neo.entity.UserEntity" >
-       INSERT INTO 
-       		users
-       		(userName,passWord,user_sex) 
-       	VALUES
-       		(#{userName}, #{passWord}, #{userSex})
+    <select id="findByUserName" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user
+        WHERE user_name = #{userName}
+    </select>
+
+    <insert id="insert" parameterType="com.example.demo.domain.security.UserVO" >
+        insert into t_radar_warning_template
+        (user_name,PASSWORD,nick_name,role_id,STATUS,mobile,email,create_name,modify_name,create_time,modify_time)
+        VALUES
+        (#{userName},#{password},#{nickName},#{roleId},#{status},#{mobile},#{email},#{createName},#{modifyName},now(),now())
     </insert>
     
-    <update id="update" parameterType="com.neo.entity.UserEntity" >
-       UPDATE 
-       		users 
+    <update id="update" parameterType="com.example.demo.domain.security.UserVO" >
+       UPDATE
+        sys_user
        SET 
-       	<if test="userName != null">userName = #{userName},</if>
-       	<if test="passWord != null">passWord = #{passWord},</if>
-       	nick_name = #{nickName}
-       WHERE 
+       	<if test="userName != null">user_name = #{userName},</if>
+       	<if test="passWord != null">password = #{password},</if>
+        <if test="nickName != null">nick_name = #{nickName},</if>
+        <if test="roleId != null">role_id = #{roleId},</if>
+        <if test="status != null">status = #{status},</if>
+        <if test="mobile != null">mobile = #{mobile},</if>
+        <if test="email != null">email = #{email},</if>
+        <if test="createName != null">create_name = #{createName},</if>
+        <if test="modifyName != null">modify_name = #{modifyName}</if>
+       WHERE
        		id = #{id}
     </update>
     
     <delete id="delete" parameterType="java.lang.Long" >
        DELETE FROM
-       		 users 
+       		 sys_user
        WHERE 
        		 id =#{id}
     </delete>

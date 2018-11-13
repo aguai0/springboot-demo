@@ -14,7 +14,7 @@ public interface UserDAO {
 
     List<UserVO> findList(UserVO record) ;
 
-    UserVO findByEmail(String email);
+    UserVO findByUserName(String userName);
 
     void insertWithNotExist(UserVO record);
 

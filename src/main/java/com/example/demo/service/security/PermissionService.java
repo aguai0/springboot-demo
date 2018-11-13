@@ -1,17 +1,30 @@
 package com.example.demo.service.security;
 
 import com.example.demo.domain.security.PermissionVO;
+import com.example.demo.domain.security.UserPermissionPO;
 
 import java.util.List;
 
+/**
+ * @author: hxy
+ * @date: 2017/10/30 13:10
+ */
 public interface PermissionService {
+    /**
+     * 查询某用户的 角色  菜单列表   权限列表
+     *
+     * @param username
+     * @return
+     */
+    UserPermissionPO getUserPermission(String username);
+
     List<PermissionVO> list(PermissionVO permission);
 
-    PermissionVO findById(long l);
+    PermissionVO findById(long id);
 
     void add(PermissionVO permission);
 
     void updateById(PermissionVO permission);
 
-    void delById(long l);
+    void delById(long id);
 }

@@ -13,9 +13,6 @@ public class RoleVO extends BaseVO {
     private String roleCode; //编号
     private String roleName;
     private String roleDesc;
-
-    private String permissions;
-
     private Integer status;
 
     public Long getId() {
@@ -48,14 +45,6 @@ public class RoleVO extends BaseVO {
 
     public void setRoleDesc(String roleDesc) {
         this.roleDesc = roleDesc;
-    }
-
-    public String getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(String permissions) {
-        this.permissions = permissions;
     }
 
     public Integer getStatus() {

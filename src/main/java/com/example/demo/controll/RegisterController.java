@@ -1,16 +1,11 @@
 package com.example.demo.controll;
 
-import com.example.demo.base.Result;
-import com.example.demo.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class RegisterController {
 
-    @Autowired
+   /* @Autowired
     UserRepository userRepository;
 
     @RequestMapping("/toRegister")
@@ -25,5 +20,5 @@ public class RegisterController {
 
         userRepository.register(new User(name,password));
         return Result.succeed();
-    }
+    }*/
 }

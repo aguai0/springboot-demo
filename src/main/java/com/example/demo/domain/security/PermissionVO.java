@@ -2,42 +2,28 @@ package com.example.demo.domain.security;
 
 import com.example.demo.base.BaseVO;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 权限
  */
 public class PermissionVO extends BaseVO{
 
+    /** 自定id,主要供前端展示权限列表分类排序使用. */
     private Long id;
 
-    private String resourceCode;
+    /** 归属菜单,前端判断并展示菜单使用 */
+    private String menuCode;
 
-    private String resourceName;
+    /** 菜单的中文释义 */
+    private String menuName;
 
-    private String resourceType;
-
-    private String parentCode;
-
-    private Integer resourceLevel;
-
+    /** 权限的代码/通配符,对应代码中@RequiresPermissions 的value */
     private String permissionCode;
 
-    private Integer resourceTag;
+    /** 本权限的中文释义 */
+    private String permissionName;
 
-    private String resourceUrl;
-
-    private Integer sort;
-
-    private Integer status;
-
-    private List<PermissionVO> childList = new ArrayList<>();
-
-
-    public void addChild (PermissionVO permissionVO) {
-        childList.add(permissionVO);
-    }
+    /** 是否本菜单必选权限, 1.必选 2非必选 通常是"列表"权限是必选 */
+    private Integer requiredPermission;
 
     public Long getId() {
         return id;
@@ -47,44 +33,20 @@ public class PermissionVO extends BaseVO{
         this.id = id;
     }
 
-    public String getResourceCode() {
-        return resourceCode;
+    public String getMenuCode() {
+        return menuCode;
     }
 
-    public void setResourceCode(String resourceCode) {
-        this.resourceCode = resourceCode;
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode;
     }
 
-    public String getResourceName() {
-        return resourceName;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
-    }
-
-    public String getResourceType() {
-        return resourceType;
-    }
-
-    public void setResourceType(String resourceType) {
-        this.resourceType = resourceType;
-    }
-
-    public String getParentCode() {
-        return parentCode;
-    }
-
-    public void setParentCode(String parentCode) {
-        this.parentCode = parentCode;
-    }
-
-    public Integer getResourceLevel() {
-        return resourceLevel;
-    }
-
-    public void setResourceLevel(Integer resourceLevel) {
-        this.resourceLevel = resourceLevel;
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 
     public String getPermissionCode() {
@@ -95,43 +57,19 @@ public class PermissionVO extends BaseVO{
         this.permissionCode = permissionCode;
     }
 
-    public Integer getResourceTag() {
-        return resourceTag;
+    public String getPermissionName() {
+        return permissionName;
     }
 
-    public void setResourceTag(Integer resourceTag) {
-        this.resourceTag = resourceTag;
+    public void setPermissionName(String permissionName) {
+        this.permissionName = permissionName;
     }
 
-    public String getResourceUrl() {
-        return resourceUrl;
+    public Integer getRequiredPermission() {
+        return requiredPermission;
     }
 
-    public void setResourceUrl(String resourceUrl) {
-        this.resourceUrl = resourceUrl;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public List<PermissionVO> getChildList() {
-        return childList;
-    }
-
-    public void setChildList(List<PermissionVO> childList) {
-        this.childList = childList;
+    public void setRequiredPermission(Integer requiredPermission) {
+        this.requiredPermission = requiredPermission;
     }
 }
