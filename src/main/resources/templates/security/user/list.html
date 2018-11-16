@@ -7,9 +7,9 @@
     <form  class="layui-form" th:action="@{/security/user/list.do_}">
         <div class="layui-form-item search-row">
             <div class="layui-inline">
-                <label class="search-label">邮箱</label>
+                <label class="search-label">用户名</label>
                 <div class="search-input">
-                    <input type="text" name="email" class="layui-input" th:value="${user.email}">
+                    <input type="text" name="userName" class="layui-input" th:value="${user.userName}">
                 </div>
             </div>
             <div class="layui-inline">
@@ -29,11 +29,10 @@
 <table class="layui-table" lay-size="sm" lay-filter="list">
     <thead>
     <tr>
-        <th lay-data="{field:'email'}">邮箱</th>
-        <th lay-data="{field:'name'}">姓名</th>
-        <th lay-data="{field:'mobile'}">手机号</th>
+        <th lay-data="{field:'id'}">序号</th>
+        <th lay-data="{field:'name'}">昵称</th>
+        <th lay-data="{field:'mobile'}">用户名</th>
         <th lay-data="{field:'roleDesc'}">角色</th>
-        <th lay-data="{field:'status'}">状态</th>
         <th lay-data="{field:'modifyTime'}">修改时间</th>
         <th lay-data="{field:'modifyName'}">修改者</th>
         <th lay-data="{field:'opt',fixed: 'right',align:'center',width:300}">操作</th>
@@ -41,20 +40,15 @@
     </thead>
     <tbody>
     <tr th:each="item:${list}">
-        <td th:text="${item.email}"></td>
-        <td th:text="${item.name}"></td>
-        <td th:text="${item.mobile}"></td>
-        <td th:text="${item.roleDesc}"></td>
-        <div th:switch="${item.status}">
-            <td th:case="1">有效</td>
-            <td th:case="0">无效</td>
-            <td th:case="-1">已删除</td>
-        </div>
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.nickName}"></td>
+        <td th:text="${item.userName}"></td>
+        <td th:text="${item.roleName}"></td>
         <td th:text="${#dates.format(item.modifyTime,'yyyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="${item.modifyName}"></td>
         <td>
-            <a class="layui-btn layui-btn-xs alt" th:attr="data-id=${item.email}" href="javascript:void(0);"><i class="layui-icon">&#xe642;</i>编辑</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs remove" th:attr="data-id=${item.email}" href="javascript:void(0);"><i class="layui-icon">&#xe640;</i>删除</a>
+            <a class="layui-btn layui-btn-xs alt" th:attr="data-id=${item.id}" href="javascript:void(0);"><i class="layui-icon">&#xe642;</i>编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs remove" th:attr="data-id=${item.id}" href="javascript:void(0);"><i class="layui-icon">&#xe640;</i>删除</a>
         </td>
     </tr>
     </tbody>

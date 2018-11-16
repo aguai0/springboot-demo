@@ -2,15 +2,14 @@ package com.example.demo.controll.security;
 
 import com.example.demo.base.Pageable;
 import com.example.demo.base.Result;
-import com.example.demo.common.enums.RoleEnum;
 import com.example.demo.domain.security.UserVO;
 import com.example.demo.service.security.UserService;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,29 +26,21 @@ public class UserController {
     @Resource
     UserService userService;
 
-
-    @RequestMapping("/info.do_")
-    public String info (Model model) {
-
-        String email = (String) SecurityUtils.getSubject().getPrincipal();
-
-        UserVO user = userService.findByUserName(email);
-
-        model.addAttribute("user", user);
-
-        return "security/user/info";
-    }
-
-
+    /**
+     * 查询用户列表
+     *
+     * @param userVO
+     * @return
+     */
+    //@RequiresPermissions("user:list")
     @RequestMapping("/list.do_")
-    public String list (Model model, UserVO user, Pageable pageable) {
+    public String listUser(Model model,UserVO userVO, Pageable pageable) {
+        userVO.setPageable(pageable);
 
-        user.setPageable(pageable);
+        Integer count = userService.count(userVO);
+        List<UserVO> list = userService.findList(userVO);
 
-        Integer count = userService.count(user);
-        List<UserVO> list = userService.list(user);
-
-        model.addAttribute("user", user);
+        model.addAttribute("user",userVO);
         model.addAttribute("count",count);
         model.addAttribute("pageable",pageable);
         model.addAttribute("list",list );
@@ -57,43 +48,19 @@ public class UserController {
         return "security/user/list";
     }
 
+    @RequiresPermissions("user:save")
+    @PostMapping("/save")
+    public Result addUser(Model model,@RequestBody UserVO userVO) {
 
-    @RequestMapping("/edit.do_")
-    public String edit (Model model, String email) {
-
-        UserVO user = new UserVO();
-
-        if(StringUtils.isNotBlank(email)){
-            user = userService.findByUserName(email);
+        if(userVO.getId() != null){
+            userService.update(userVO);
+        }else {
+            userService.save(userVO);
         }
-        model.addAttribute("user", user);
-        model.addAttribute("roles", RoleEnum.values());
 
-        return "security/user/edit";
+        model.addAttribute("user", userVO);
+        return  Result.succeed();
     }
 
-
-    @RequestMapping("/save.do_")
-    @ResponseBody
-    public Result save (Model model, UserVO user) {
-
-        userService.upsert(user);
-
-        model.addAttribute("user", user);
-
-        return Result.succeed();
-    }
-
-
-    @RequestMapping("/del.do_")
-    @ResponseBody
-    public Result del (Model model, String email) {
-
-        userService.delByEmail(email);
-
-        model.addAttribute("email", email);
-
-        return Result.succeed();
-    }
 
 }

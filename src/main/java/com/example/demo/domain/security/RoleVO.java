@@ -54,4 +54,6 @@ public class RoleVO extends BaseVO {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+
 }

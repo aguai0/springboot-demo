@@ -18,6 +18,8 @@ public class UserVO extends BaseVO {
 
     private Integer status;
 
+    private String roleName;
+
     public Long getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class UserVO extends BaseVO {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

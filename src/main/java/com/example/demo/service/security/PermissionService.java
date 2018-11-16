@@ -1,27 +1,17 @@
 package com.example.demo.service.security;
 
 import com.example.demo.domain.security.PermissionVO;
-import com.example.demo.domain.security.UserPermissionPO;
 
 import java.util.List;
 
 
 public interface PermissionService {
+
     /**
-     * 查询某用户的 角色  菜单列表   权限列表
+     * 查询所有权限, 给角色分配权限时调用
      *
-     * @param username
      * @return
      */
-    UserPermissionPO getUserPermission(String username);
+    List<PermissionVO> listAllPermission();
 
-    List<PermissionVO> list(PermissionVO permission);
-
-    PermissionVO findById(long id);
-
-    void add(PermissionVO permission);
-
-    void updateById(PermissionVO permission);
-
-    void delById(long id);
 }

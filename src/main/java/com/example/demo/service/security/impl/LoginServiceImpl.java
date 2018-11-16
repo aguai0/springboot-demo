@@ -6,7 +6,6 @@ import com.example.demo.dao.security.LoginDao;
 import com.example.demo.domain.security.UserPermissionPO;
 import com.example.demo.domain.security.UserVO;
 import com.example.demo.service.security.LoginService;
-import com.example.demo.service.security.PermissionService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -23,9 +22,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private LoginDao loginDao;
-
-    @Autowired
-    private PermissionService permissionService;
 
     /**
      * 登录表单提交
@@ -51,7 +47,7 @@ public class LoginServiceImpl implements LoginService {
     /**
      * 根据用户名和密码查询对应的用户
      *
-     * @param username 用户名
+     * @param userName 用户名
      * @param password 密码
      * @return
      */
@@ -72,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
         JSONObject userInfo = (JSONObject) session.getAttribute(SysConstant.SESSION_USER_INFO);
         String username = userInfo.getString("username");
         JSONObject returnData = new JSONObject();
-        UserPermissionPO userPermission = permissionService.getUserPermission(username);
+        UserPermissionPO userPermission = null/*permissionService.getUserPermission(username)*/;
         session.setAttribute(SysConstant.SESSION_USER_PERMISSION, userPermission);
         returnData.put("userPermission", userPermission);
         return userPermission;

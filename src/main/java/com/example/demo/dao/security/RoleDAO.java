@@ -2,21 +2,19 @@ package com.example.demo.dao.security;
 
 import com.example.demo.domain.security.RoleVO;
 
+import java.util.List;
+
 public interface RoleDAO{
 
+    Integer count(RoleVO roleVO);
 
-    int deleteByPrimaryKey(Long id);
+    List<RoleVO> findList(RoleVO roleVO);
 
-    void insert(RoleVO record);
+    List<RoleVO> getAll();
 
-    void insertSelective(RoleVO record);
+    void delete(Long roleId);
 
-    RoleVO selectByPrimaryKey(Long id);
+    void insert(RoleVO roleVO);
 
-    int updateByPrimaryKeySelective(RoleVO record);
-
-    int updateByPrimaryKey(RoleVO record);
-
-    RoleVO findByCode(String roleCode);
-
+    void update(RoleVO roleVO);
 }

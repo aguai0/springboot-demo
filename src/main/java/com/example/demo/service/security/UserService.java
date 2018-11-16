@@ -3,18 +3,14 @@ package com.example.demo.service.security;
 import com.example.demo.domain.security.UserVO;
 
 import java.util.List;
-import java.util.Set;
 
 public interface UserService {
-    UserVO findByUserName(String userName);
 
-    Integer count(UserVO user);
+    Integer count(UserVO userVO);
 
-    List<UserVO> list(UserVO user);
+    List<UserVO> findList(UserVO userVO);
 
-    void upsert(UserVO user);
+    void update(UserVO userVO);
 
-    void delByEmail(String email);
-
-    Set<String> findPermissions(String s);
+    void save(UserVO userVO);
 }
