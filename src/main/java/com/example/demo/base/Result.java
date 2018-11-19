@@ -14,7 +14,7 @@ public class Result<T>  implements Serializable {
     private static final String FAILURE = "操作失败";
 
     private T data;
-    private String message;
+    private String msg;
     private Integer code;
 
     public Result() {
@@ -22,7 +22,7 @@ public class Result<T>  implements Serializable {
 
     public Result(Integer code, String message, T data) {
         this.data = data;
-        this.message = message;
+        this.msg = message;
         this.code = code;
     }
 
@@ -58,12 +58,12 @@ public class Result<T>  implements Serializable {
         this.data = data;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public Integer getCode() {

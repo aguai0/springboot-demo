@@ -13,4 +13,10 @@ public interface UserService {
     void update(UserVO userVO);
 
     void save(UserVO userVO);
+
+    UserVO queryById(Long id);
+
+    void deleteById(Long id);
+
+    UserVO findByName(String userName);
 }

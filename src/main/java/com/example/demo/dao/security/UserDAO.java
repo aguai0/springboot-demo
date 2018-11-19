@@ -17,4 +17,8 @@ public interface UserDAO {
     void insert(UserVO record);
 
     void update(UserVO userVO);
+
+    UserVO queryUser(UserVO userVO);
+
+    void deleteById(Long id);
 }

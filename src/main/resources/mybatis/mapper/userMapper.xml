@@ -3,7 +3,8 @@
 <mapper namespace="com.example.demo.dao.security.UserDAO" >
 
     <sql id="queryCondition">
-        <if test="id != null">id = #{id}</if>
+        <if test="id != null">and id = #{id}</if>
+        <if test="userName != null and userName != '' ">and user_name = #{userName}</if>
     </sql>
 
     <select id="count" parameterType="UserVO" resultType="java.lang.Integer" >
@@ -15,9 +16,18 @@
     </select>
 
     <select id="findList" parameterType="UserVO" resultType="UserVO"  >
-       SELECT  u.id,u.nick_name nickName, u.user_name userName,u.status, u.create_time createTime,u.modify_time modifyTime,r.role_name roleName
+       SELECT  u.id,u.nick_name nickName, u.user_name userName,u.status, u.create_time createTime,u.modify_time modifyTime,u.role_id roleId,r.role_name roleName
 	   FROM sys_user u
        LEFT JOIN sys_role r ON r.id = u.role_id
+       WHERE 1=1
+        <include refid="queryCondition"/>
+    </select>
+
+    <select id="queryUser" parameterType="UserVO" resultType="UserVO"  >
+        SELECT id, user_name userName, password, nick_name nickName, role_id roleId, create_time createTime, modify_time modifyTime,
+         status, mobile, email, create_name createName, modify_name modifyName
+        FROM sys_user
+        WHERE 1=1
         <include refid="queryCondition"/>
     </select>
 
@@ -40,13 +50,14 @@
             <if test="mobile != null">mobile = #{mobile},</if>
             <if test="email != null">email = #{email},</if>
             <if test="createName != null">create_name = #{createName},</if>
-            <if test="modifyName != null">modify_name = #{modifyName}</if>
+            <if test="modifyName != null">modify_name = #{modifyName},</if>
+            modify_time = now()
         </set>
        WHERE
        		id = #{id}
     </update>
     
-    <delete id="delete" parameterType="java.lang.Long" >
+    <delete id="deleteById" parameterType="java.lang.Long" >
        DELETE FROM
        		 sys_user
        WHERE 

@@ -124,7 +124,7 @@
                 ,title: ['用户信息','font-size:18px']
                 ,shadeClose: true
                 ,maxmin: true //允许全屏最小化
-                ,content:'edit.do_?email='+_this.data('id')
+                ,content:'edit.do_?id='+_this.data('id')
             });
         });
 
@@ -132,7 +132,7 @@
         $(".remove").on('click', function () {
             var _this = $(this);
             layer.confirm('确定删除吗?',{title:'删除'}, function(){
-                $.getJSON('del.do_', {email:_this.data('id')}, function(ret){
+                $.getJSON('del.do_', {id:_this.data('id')}, function(ret){
                     if (ret.code == 200){
                         $('#'+_this.data('id')).hide();
                         layer.msg(ret.msg, {icon: 1,time:600},function () {

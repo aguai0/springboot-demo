@@ -4,19 +4,20 @@
 <body>
 <div class="layui-col-md12">
     <div class="layui-card">
-        <div class="layui-card-header" th:text="${#strings.equals(user.email,null)?'新增用户':'修改用户'}"></div>
+        <div class="layui-card-header" th:text="${#strings.equals(user.id,null)?'新增用户':'修改用户'}"></div>
         <div class="layui-card-body">
             <form class="layui-form" th:action="@{/security/user/save.do_}" method="post">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">邮箱</label>
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <label class="layui-form-label">用户名</label>
                     <div class="layui-input-inline" style="width: 70%">
-                        <input type="text" name="email" th:value="${user.email}" th:readonly="${#strings.equals(user.email,null)?'false':'true'}" lay-verify="required" lay-vertype="tips" autocomplete="off" class="layui-input">
+                        <input type="text" name="userName" th:value="${user.userName}" th:readonly="${#strings.equals(user.userName,null)?'false':'true'}" lay-verify="required" lay-vertype="tips" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">姓名</label>
+                    <label class="layui-form-label">密码</label>
                     <div class="layui-input-inline" style="width: 70%">
-                        <input type="text" name="name" th:value="${user.name}" lay-vertype="tips" autocomplete="off" class="layui-input">
+                        <input type="password" name="password" th:value="${user.password}" lay-vertype="tips" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -26,16 +27,28 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-inline" style="width: 70%">
+                        <input type="text" name="email" th:value="${user.email}" lay-vertype="tips" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <label class="layui-form-label">角色</label>
                     <div class="layui-input-inline" style="width: 70%">
-                        <select name="roles" lay-verify="required">
-                            <option th:each="item:${roles}" th:value="${item.roleCode}" th:text="${item.roleName}" th:selected="${#strings.equals(user.roles,item.roleCode)?'true':'false'}"></option>
+                        <select name="roleId" lay-verify="required">
+                            <option th:each="item:${roles}" th:value="${item.id}" th:text="${item.roleName}" th:selected="${#strings.equals(user.roleId,item.id)?'true':'false'}"></option>
                         </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label">昵称</label>
+                    <div class="layui-input-inline" style="width: 70%">
+                        <input type="text" name="nickName" th:value="${user.nickName}" lay-vertype="tips" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn layui-btn-sm" lay-submit lay-filter="save" th:text="${#strings.equals(user.email,null)?'保存':'修改'}"></button>
+                        <button class="layui-btn layui-btn-sm" lay-submit lay-filter="save" th:text="${#strings.equals(user.id,null)?'保存':'修改'}"></button>
                         <button type="button" class="layui-btn layui-btn-sm layui-btn-primary close">关闭</button>
                     </div>
                 </div>

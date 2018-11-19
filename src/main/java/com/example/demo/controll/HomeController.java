@@ -10,7 +10,7 @@ public class HomeController {
 
     @RequestMapping("/index")
     public String index(Model model){
-        model.addAttribute("username", SecurityUtils.getSubject().getPrincipal());
+        model.addAttribute("userName", SecurityUtils.getSubject().getPrincipal());
         return "index";//登录后的页面
     }
 

@@ -9,11 +9,6 @@ public class Pageable implements Serializable {
 
     private Integer size = 10;//每页显示多少条
 
-    public Pageable(Integer page, Integer size) {
-        this.page = page;
-        this.size = size;
-    }
-
     public Integer getPage() {
         return page;
     }
