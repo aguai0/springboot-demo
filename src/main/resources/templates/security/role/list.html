@@ -3,19 +3,51 @@
 <head th:replace="fragments/headTag :: head"></head>
 <body class="child-body">
 
+<div class="layui-row">
+    <form  class="layui-form" th:action="@{/security/role/list.do_}">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <a href="javascript:void(0)" type="button" id="add" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe608;</i>新增</a>
+            </div>
+        </div>
+        <input type="hidden" name="page" id="pg">
+        <input type="hidden" name="size" id="se">
+    </form>
+</div>
+
 <table class="layui-table" lay-size="sm" lay-filter="list">
     <thead>
     <tr>
-        <th lay-data="{field:'roleCode'}">角色编码</th>
-        <th lay-data="{field:'roleName'}">角色名称</th>
-        <th lay-data="{field:'permission'}">权限</th>
+        <th lay-data="{field:'roleId'}">序号</th>
+        <th lay-data="{field:'roleName'}">角色</th>
+        <th lay-data="{field:'userName'}">用户</th>
+        <th lay-data="{field:'menuName'}">菜单&权限</th>
+        <th lay-data="{field:'opt',fixed: 'right',align:'center',width:300}">操作</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="item:${list}">
-        <td th:text="${item.roleCode}"></td>
+        <td th:text="${item.roleId}"></td>
         <td th:text="${item.roleName}"></td>
-        <td th:text="${item.permission}"></td>
+        <td>
+            <th:block th:each="user:${item.users}">
+                <pre th:text="${user.userName}"></pre>
+            </th:block>
+        </td>
+        <td th:if="${item.roleName=='管理员'}"><span class="layui-btn layui-btn-xs">全部</span></td>
+        <td th:if="${item.roleName!='管理员'}">
+            <th:block th:each="menu:${item.menus}">
+                <span class="layui-badge layui-bg-gray" th:text="${menu.menuName}"></span>&nbsp;&nbsp;
+                <th:block th:each="permission:${menu.permissions}">
+                    <span class="layui-btn layui-btn-xs" th:text="${permission.permissionName}"></span>
+                </th:block>
+                <hr>
+            </th:block>
+        </td>
+        <td>
+            <a class="layui-btn layui-btn-xs alt" th:attr="data-id=${item.roleId}" href="javascript:void(0);"><i class="layui-icon">&#xe642;</i>编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs remove" th:attr="data-id=${item.roleId}" href="javascript:void(0);"><i class="layui-icon">&#xe640;</i>删除</a>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -25,6 +57,91 @@
     layui.use(['element','laypage','table','form'], function(){
 
         $ = layui.jquery;
+        var form = layui.form;
+        var table= layui.table;
+        var laypage = layui.laypage;
+
+        /*<![CDATA[*/
+        var ct = [[${count}]];
+        var cn = [[${pageable.page}]];
+        var ns = [[${pageable.size}]];
+        /*]]>*/
+        $('#pg').val(cn);
+        $('#se').val(ns);
+
+        form.on('submit(search)', function (data) {
+            $('#pg').val(0);
+            $('#se').val(ns);
+            $('form').submit();
+            return false;
+        });
+
+        //分页
+        laypage.render({
+            elem: 'pag',
+            count:ct, //数据总数，从服务端得到
+            groups:10,
+            limit:ns,
+            // limits:[10, 20, 30, 40, 50],
+            curr:cn+1,
+            layout:['prev', 'page', 'next','skip','count','limit'],
+            jump: function(obj,first){
+                if(!first){
+                    if($('#se').val() != obj.limit) {
+                        $('#pg').val(0);
+                        $('#se').val(obj.limit);
+                    } else {
+                        $('#pg').val(obj.curr-1);
+                        $('#se').val(obj.limit);
+                    }
+                    $('form').submit();
+                }
+            }
+        });
+
+        //新增
+        $('#add').on('click',function () {
+            layer.open({
+                type: 2 //Page层类型
+                ,skin: 'layui-layer-molv'
+                ,area: ['600px', '555px']
+                ,title: ['用户信息','font-size:18px']
+                ,shadeClose: true
+                ,maxmin: true //允许全屏最小化
+                ,content:'edit.do_'
+            });
+        });
+
+        //修改
+        $('.alt').on('click',function () {
+            var _this = $(this);
+            layer.open({
+                type: 2 //Page层类型
+                ,skin: 'layui-layer-molv'
+                ,area: ['600px', '555px']
+                ,title: ['用户信息','font-size:18px']
+                ,shadeClose: true
+                ,maxmin: true //允许全屏最小化
+                ,content:'edit.do_?id='+_this.data('id')
+            });
+        });
+
+        //删除
+        $(".remove").on('click', function () {
+            var _this = $(this);
+            layer.confirm('确定删除吗?',{title:'删除'}, function(){
+                $.getJSON('del.do_', {id:_this.data('id')}, function(ret){
+                    if (ret.code == 200){
+                        $('#'+_this.data('id')).hide();
+                        layer.msg(ret.msg, {icon: 1,time:600},function () {
+                            location.reload();
+                        });
+                    } else {
+                        layer.msg(ret.msg, {icon: 2,time:600});
+                    }
+                });
+            });
+        })
 
     });
 </script>

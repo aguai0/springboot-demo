@@ -1,4 +1,4 @@
-package com.example.demo.domain.security;
+package com.example.demo.domain.security.vo;
 
 import com.example.demo.base.BaseVO;
 
@@ -8,7 +8,7 @@ import com.example.demo.base.BaseVO;
 public class UserVO extends BaseVO {
 
     private Long id;
-
+    private Long userId;
     private String userName;
     private String email;
     private String nickName;
@@ -26,6 +26,14 @@ public class UserVO extends BaseVO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {

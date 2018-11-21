@@ -1,13 +1,15 @@
 package com.example.demo.service.security.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.security.PermissionDao;
-import com.example.demo.domain.security.PermissionVO;
+import com.example.demo.domain.security.po.PermissionPO;
 import com.example.demo.service.security.PermissionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,7 +22,13 @@ public class PermissionServiceImpl implements PermissionService {
     private PermissionDao permissionDao;
 
     @Override
-    public List<PermissionVO> listAllPermission() {
-        return permissionDao.getAll();
+    public List<PermissionPO> getAllPermission() {
+        List<JSONObject> jbs = permissionDao.getAllPermission();
+        List<PermissionPO> permissionPOs = new ArrayList<>();
+        for(JSONObject jb: jbs) {
+            PermissionPO permissionPO = JSONObject.toJavaObject(jb, PermissionPO.class);
+            permissionPOs.add(permissionPO);
+        }
+        return permissionPOs;
     }
 }

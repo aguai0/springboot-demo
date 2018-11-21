@@ -1,6 +1,6 @@
 package com.example.demo.service.security;
 
-import com.example.demo.domain.security.PermissionVO;
+import com.example.demo.domain.security.po.PermissionPO;
 
 import java.util.List;
 
@@ -12,6 +12,6 @@ public interface PermissionService {
      *
      * @return
      */
-    List<PermissionVO> listAllPermission();
+    List<PermissionPO> getAllPermission();
 
 }

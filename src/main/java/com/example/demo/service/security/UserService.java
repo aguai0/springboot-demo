@@ -1,6 +1,6 @@
 package com.example.demo.service.security;
 
-import com.example.demo.domain.security.UserVO;
+import com.example.demo.domain.security.vo.UserVO;
 
 import java.util.List;
 

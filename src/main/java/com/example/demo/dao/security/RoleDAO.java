@@ -1,20 +1,24 @@
 package com.example.demo.dao.security;
 
-import com.example.demo.domain.security.RoleVO;
+import com.alibaba.fastjson.JSONObject;
+import com.example.demo.domain.security.vo.RoleVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface RoleDAO{
 
-    Integer count(RoleVO roleVO);
+    Integer count();
 
-    List<RoleVO> findList(RoleVO roleVO);
+    List<JSONObject> findRolePermissions(RoleVO role);
 
     List<RoleVO> getAll();
 
     void delete(Long roleId);
 
-    void insert(RoleVO roleVO);
+    Long insert(RoleVO roleVO);
 
     void update(RoleVO roleVO);
+
+    JSONObject getRoleInfo(@Param("roleId") Long roleId);
 }

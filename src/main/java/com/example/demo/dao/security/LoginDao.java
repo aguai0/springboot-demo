@@ -1,6 +1,6 @@
 package com.example.demo.dao.security;
 
-import com.example.demo.domain.security.UserVO;
+import com.example.demo.domain.security.vo.UserVO;
 import org.apache.ibatis.annotations.Param;
 
 

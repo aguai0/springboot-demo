@@ -2,8 +2,8 @@ package com.example.demo.controll.security;
 
 import com.example.demo.base.Pageable;
 import com.example.demo.base.Result;
-import com.example.demo.domain.security.RoleVO;
-import com.example.demo.domain.security.UserVO;
+import com.example.demo.domain.security.vo.RoleVO;
+import com.example.demo.domain.security.vo.UserVO;
 import com.example.demo.service.security.RoleService;
 import com.example.demo.service.security.UserService;
 import org.springframework.stereotype.Controller;

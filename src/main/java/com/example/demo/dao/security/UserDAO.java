@@ -1,6 +1,6 @@
 package com.example.demo.dao.security;
 
-import com.example.demo.domain.security.UserVO;
+import com.example.demo.domain.security.vo.UserVO;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface UserDAO {
 
     int count(UserVO record);
 
-    List<UserVO> findList(UserVO record) ;
+    List<UserVO> findList(UserVO record);
 
     void insert(UserVO record);
 

@@ -1,7 +1,7 @@
 package com.example.demo.controll;
 
 import com.example.demo.base.Result;
-import com.example.demo.domain.security.UserVO;
+import com.example.demo.domain.security.vo.UserVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;

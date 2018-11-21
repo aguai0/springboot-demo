@@ -2,7 +2,7 @@ package com.example.demo.service.security;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo.BaseTest;
-import com.example.demo.domain.security.UserVO;
+import com.example.demo.domain.security.vo.UserVO;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

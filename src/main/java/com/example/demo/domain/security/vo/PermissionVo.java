@@ -1,29 +1,15 @@
-package com.example.demo.domain.security;
+package com.example.demo.domain.security.vo;
 
 import com.example.demo.base.BaseVO;
 
-/**
- * 权限
- */
-public class PermissionVO extends BaseVO{
+public class PermissionVo extends BaseVO {
 
-    /** 自定id,主要供前端展示权限列表分类排序使用. */
     private Long id;
-
-    /** 归属菜单,前端判断并展示菜单使用 */
     private String menuCode;
-
-    /** 菜单的中文释义 */
     private String menuName;
-
-    /** 权限的代码/通配符,对应代码中@RequiresPermissions 的value */
     private String permissionCode;
-
-    /** 本权限的中文释义 */
     private String permissionName;
-
-    /** 是否本菜单必选权限, 1.必选 2非必选 通常是"列表"权限是必选 */
-    private Integer requiredPermission;
+    private Integer requiredPerm;
 
     public Long getId() {
         return id;
@@ -65,11 +51,11 @@ public class PermissionVO extends BaseVO{
         this.permissionName = permissionName;
     }
 
-    public Integer getRequiredPermission() {
-        return requiredPermission;
+    public Integer getRequiredPerm() {
+        return requiredPerm;
     }
 
-    public void setRequiredPermission(Integer requiredPermission) {
-        this.requiredPermission = requiredPermission;
+    public void setRequiredPerm(Integer requiredPerm) {
+        this.requiredPerm = requiredPerm;
     }
 }

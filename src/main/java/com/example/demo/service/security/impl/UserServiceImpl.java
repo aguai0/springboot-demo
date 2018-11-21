@@ -2,7 +2,7 @@ package com.example.demo.service.security.impl;
 
 import com.example.demo.common.enums.StatusEnum;
 import com.example.demo.dao.security.UserDAO;
-import com.example.demo.domain.security.UserVO;
+import com.example.demo.domain.security.vo.UserVO;
 import com.example.demo.service.security.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     public void save(UserVO userVO) {
         userVO.setStatus(StatusEnum.valid.getCode());
         userVO.setCreateName((String) SecurityUtils.getSubject().getPrincipal());
-        userVO.setModifyName((String) SecurityUtils.getSubject().getPrincipal());
+        //userVO.setModifyName((String) SecurityUtils.getSubject().getPrincipal());
         userDAO.insert(userVO);
     }
 

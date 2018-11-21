@@ -2,7 +2,7 @@ package com.example.demo.shiro;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.common.constants.SysConstant;
-import com.example.demo.domain.security.UserVO;
+import com.example.demo.domain.security.vo.UserVO;
 import com.example.demo.service.security.LoginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

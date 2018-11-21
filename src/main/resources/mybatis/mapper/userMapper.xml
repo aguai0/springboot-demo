@@ -21,6 +21,7 @@
        LEFT JOIN sys_role r ON r.id = u.role_id
        WHERE 1=1
         <include refid="queryCondition"/>
+       limit #{pageable.page},#{pageable}
     </select>
 
     <select id="queryUser" parameterType="UserVO" resultType="UserVO"  >
