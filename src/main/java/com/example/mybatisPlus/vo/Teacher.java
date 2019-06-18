@@ -1,8 +1,6 @@
 package com.example.mybatisPlus.vo;
 
-import com.baomidou.mybatisplus.annotations.TableName;
-
-@TableName(value = "teacher")
+//@TableName(value = "teacher")
 public class Teacher {
     private int id;
 

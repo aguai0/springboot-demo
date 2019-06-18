@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.dao.security.RoleDAO" >
+<mapper namespace="com.example.shiroDemo.dao.security.RoleDAO" >
 
-    <resultMap id="roleMap" type="com.example.demo.domain.security.One2Many">
+    <resultMap id="roleMap" type="com.example.shiroDemo.domain.security.One2Many">
         <id column="roleId" property="roleId"/>
         <result column="roleName" property="roleName"/>
         <collection property="users" ofType="com.alibaba.fastjson.JSONObject">
             <id column="userId" property="userId"/>
             <result column="userName" property="userName"/>
         </collection>
-        <collection property="menus" ofType="com.example.demo.domain.security.One2Many">
+        <collection property="menus" ofType="com.example.shiroDemo.domain.security.One2Many">
             <id column="menuCode" property="menuCode"/>
             <result column="menuName" property="menuName"/>
             <collection property="permissions" ofType="com.alibaba.fastjson.JSONObject">
@@ -78,7 +78,7 @@
         WHERE status='1'
     </select>
 
-    <resultMap id="aRole" type="com.example.demo.domain.security.One2Many">
+    <resultMap id="aRole" type="com.example.shiroDemo.domain.security.One2Many">
         <id column="roleId" property="roleId"/>
         <result column="roleName" property="roleName"/>
         <collection property="users" ofType="com.alibaba.fastjson.JSONObject">

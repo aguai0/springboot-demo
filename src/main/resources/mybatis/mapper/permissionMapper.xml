@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.dao.security.PermissionDao">
+<mapper namespace="com.example.shiroDemo.dao.security.PermissionDao">
 
-    <resultMap id="permissionMap" type="com.example.demo.domain.security.One2Many">
+    <resultMap id="permissionMap" type="com.example.shiroDemo.domain.security.One2Many">
         <id column="menuName" property="menuName"/>
         <collection property="permissions" ofType="com.alibaba.fastjson.JSONObject">
             <id column="id" property="id"/>

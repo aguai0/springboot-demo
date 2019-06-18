@@ -1,51 +1,49 @@
 package com.example.mybatisPlus.controller;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.example.mybatisPlus.mapper.TeacherMapper;
+import com.example.mybatisPlus.service.TeacherService;
 import com.example.mybatisPlus.vo.Teacher;
+import com.example.shiroDemo.base.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-@Controller
+@RestController
 @RequestMapping(value = "teacher")
 public class TeacherController {
 
     @Autowired
-    TeacherMapper teacherMapper;
+    TeacherService teacherService;
 
     @GetMapping(value = "/insert")
-    public void insert(){
+    public Result insert(){
         Teacher teacher=new Teacher();
-        teacher.setTeacherName(createRandomStr(6));
+       /* teacher.setTeacherName(createRandomStr(6));
         teacher.setTeacherPwd(createRandomStr(6));
-        teacherMapper.insert(teacher);
+        teacherService.insert(teacher);*/
+        return  Result.succeed("成功",teacher);
     }
 
     @GetMapping(value = "/delete")
     public void delete(){
-        Teacher  teacher=new Teacher();
+        /*Teacher  teacher=new Teacher();
         teacher.setId(11);
         EntityWrapper entityWrapper=new EntityWrapper(teacher);
-        teacherMapper.delete(entityWrapper);
+        teacherService.delete(entityWrapper);*/
     }
 
     @GetMapping(value = "/update")
     public void update(){
         //update的判断条件
-        EntityWrapper entityWrapper=new EntityWrapper(new Teacher(1));
+     /*   EntityWrapper entityWrapper=new EntityWrapper(new Teacher(1));
         //更新之后的对象
         Teacher teacher=new Teacher();
         teacher.setTeacherPwd("new-pwd");
-        teacherMapper.update(teacher,entityWrapper);
+        teacherService.update(teacher,entityWrapper);*/
     }
 
 
@@ -59,7 +57,8 @@ public class TeacherController {
      */
     @GetMapping(value = "/selectAllById")
     public Teacher selectByTeacherName(int id){
-        return teacherMapper.selectOne(new Teacher(id));
+        //return teacherService.selectOne(new Teacher(id));
+        return null;
     }
 
     /**
@@ -72,9 +71,10 @@ public class TeacherController {
      */
     @GetMapping(value = "/selectAllByMap")
     public List<Teacher> selectAllByEntity(String name){
-        Map<String,Object> hashMap=new HashMap<>();
+      /*  Map<String,Object> hashMap=new HashMap<>();
         hashMap.put("teacher_name",name);
-        return teacherMapper.selectByMap(hashMap);
+        return teacherService.selectByMap(hashMap);*/
+        return null;
     }
 
     /**
@@ -85,11 +85,12 @@ public class TeacherController {
      */
     @GetMapping(value = "/selectCountByEntity")
     public int selectCount(String name){
-        Teacher teacher=new Teacher();
+        /*Teacher teacher=new Teacher();
         teacher.setId(1);
         teacher.setTeacherName(name);
         EntityWrapper<Teacher> entityWrapper=new EntityWrapper<>(teacher);
-        return teacherMapper.selectCount(entityWrapper);
+        return teacherService.selectCount(entityWrapper);*/
+        return 0;
     }
 
     /**
@@ -101,10 +102,11 @@ public class TeacherController {
      */
     @GetMapping(value = "/selectAllInPage")
     public List<Teacher> selectAllInPage(int pageNumber,int pageSize){
-        Page<Teacher> page =new Page<>(pageNumber,pageSize);
+       /* Page<Teacher> page =new Page<>(pageNumber,pageSize);
         EntityWrapper<Teacher> entityWrapper = new EntityWrapper<>();
         entityWrapper.ge("id", 1);
-        return teacherMapper.selectPage(page,entityWrapper);
+        return teacherService.selectPage(page,entityWrapper);*/
+        return null;
     }
 
     /**
@@ -118,7 +120,7 @@ public class TeacherController {
         idList.add(1);
         idList.add(10);
         idList.add(11);
-        return teacherMapper.selectBatchIds(idList);
+        return null; //teacherService.selectBatchIds(idList);
     }
 
 
@@ -131,12 +133,13 @@ public class TeacherController {
      */
     @GetMapping(value = "/selectAllByWrapper1")
     public  List<Teacher> selectAllByWrapper1(){
-        Map<String,Object> map=new HashMap<>();
+       /* Map<String,Object> map=new HashMap<>();
         map.put("teacher_name","name");
         map.put("teacher_pwd","pwd");
         EntityWrapper entity=new EntityWrapper();
         entity.allEq(map);
-        return teacherMapper.selectList(entity);
+        return teacherService.selectList(entity);*/
+       return null;
     }
 
     /**
@@ -148,9 +151,10 @@ public class TeacherController {
      */
     @GetMapping(value = "/selectAllByWrapper3")
     public List<Teacher> selectAllByWrapper3(){
-        EntityWrapper entity=new EntityWrapper();
+     /*   EntityWrapper entity=new EntityWrapper();
         entity.ne("teacher_name","name");
-        return teacherMapper.selectList(entity);
+        return teacherService.selectList(entity);*/
+        return null;
     }
 
     /**
@@ -162,9 +166,10 @@ public class TeacherController {
      */
     @GetMapping(value = "/selectAllByWrapper2")
     public List<Teacher> selectAllByWrapper2(){
-        EntityWrapper entity=new EntityWrapper();
+      /*  EntityWrapper entity=new EntityWrapper();
         entity.eq("teacher_name","name");
-        return teacherMapper.selectList(entity);
+        return teacherService.selectList(entity);*/
+        return null;
     }
 
     /**
@@ -173,14 +178,15 @@ public class TeacherController {
      */
     @GetMapping(value = "/selectAllByWrapper4")
     public  List<Teacher> selectAllByWrapper4(){
-        EntityWrapper entity=new EntityWrapper();
+        /*EntityWrapper entity=new EntityWrapper();
         entity.gt("id","0");
         entity.le("id",11);
         entity.ne("teacher_name","null_name");
         entity.like("teacher_name","tt");
         entity.notLike("teacher_pwd","sadas");
         entity.orderBy("id");
-        return teacherMapper.selectList(entity);
+        return teacherService.selectList(entity);*/
+        return null;
     }
 
 
