@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.annotation.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -20,7 +20,7 @@ public class AopScan {
     /** 日志记录器 */
     private static final Logger LOGGER = LoggerFactory.getLogger(AopScan.class);
 
-    @Pointcut("@annotation(com.example.test.OneSimpleAnnotation)")
+    @Pointcut("@annotation(com.example.annotation.aop.OneSimpleAnnotation)")
     private void annotationPointCut(){}
 
     @Before("annotationPointCut()")

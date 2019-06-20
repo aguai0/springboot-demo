@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.annotation.aop;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

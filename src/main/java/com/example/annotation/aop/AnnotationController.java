@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.annotation.aop;
 
 
 import com.example.mybatisPlus.vo.Teacher;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnnotationController {
 
     @RequestMapping(value = "/annotation")
-    @OneSimpleAnnotation(key = "test")
+    @OneSimpleAnnotation(key = "test=1")
     public String test(String req){
         System.out.println("annotation test ..."+req);
         return "success";
