@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnnotationController {
 
     @RequestMapping(value = "/annotation")
-    @OneSimpleAnnotation(key = "test=1")
-    public String test(String req){
-        System.out.println("annotation test ..."+req);
-        return "success";
+    @OneSimpleAnnotation(key = "#test")
+    public String testPage(String test){
+        return test;
     }
 
     public static void main(String[] args) {
