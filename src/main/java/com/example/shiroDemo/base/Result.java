@@ -16,6 +16,7 @@ public class Result<T>  implements Serializable {
     private T data;
     private String msg;
     private Integer code;
+    private Integer status;
 
     public Result() {
     }
@@ -72,5 +73,13 @@ public class Result<T>  implements Serializable {
 
     public void setCode(Integer code) {
         this.code = code;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

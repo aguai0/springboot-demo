@@ -39,14 +39,6 @@ public class AopScan {
     @Pointcut("@annotation(com.example.annotation.aop.OneSimpleAnnotation)")
     private void annotationPointCut(){}
 
-
-    /**
-     StandardEvaluationContext context = new StandardEvaluationContext();
-     context.setVariable("key", key);
-     Expression expression = parser.parseExpression("#key");
-     String parameter = expression.getValue(context, String.class);
-     LOGGER.info("parameter:{}", parameter);
-     */
     @Around("annotationPointCut()")
     public Object annotationResult(ProceedingJoinPoint joinPoint) {
         LOGGER.info("测试开始..........");

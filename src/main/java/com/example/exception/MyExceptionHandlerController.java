@@ -18,6 +18,10 @@ public class MyExceptionHandlerController {
         }catch (NullPointerException e){
           throw new NullReqException();
         }
+
+        if(count ==null){
+            throw new ApplicationException(ApplicationEnum.fail);
+        }
         return "请求controller测试";
     }
 
