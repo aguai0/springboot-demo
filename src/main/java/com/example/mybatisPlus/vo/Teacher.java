@@ -1,7 +1,10 @@
 package com.example.mybatisPlus.vo;
 
+import java.io.Serializable;
+
 //@TableName(value = "teacher")
-public class Teacher {
+public class Teacher implements Serializable{
+    private static final long serialVersionUID = 591460844118135217L;
     private int id;
 
     private String teacherName;
@@ -18,6 +21,12 @@ public class Teacher {
 
     public Teacher(int id) {
         this.id = id;
+    }
+
+    public Teacher(int id, String teacherName, String teacherPwd) {
+        this.id = id;
+        this.teacherName = teacherName;
+        this.teacherPwd = teacherPwd;
     }
 
     public Teacher setId(int id) {

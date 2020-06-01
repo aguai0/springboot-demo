@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.2.RELEASE</version>
+        <version>2.0.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -153,6 +153,10 @@
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+        </dependency>
         <!--<dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatisplus-spring-boot-starter</artifactId>
@@ -165,30 +169,54 @@
         </dependency>-->
         <!-- end mysql mybatis -->
 
+        <!-- redis -->
+        <!--<dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>-->
+        <!-- 在 Spring Boot 2.x 以后底层不再使用 Jedis，而是换成了 Lettuce。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- 用作 Redis 连接池，如不引入启动会报错 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
+        <!--Spring Session 引入，用作共享 Session。-->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+
     </dependencies>
 
-    <build>
+            <build>
 
-        <!--        <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-                        <excludes>
-                            <exclude>bootstrap-test.properties</exclude>
-                            <exclude>bootstrap-dev.properties</exclude>
-                            <exclude>bootstrap-pro.properties</exclude>
-                            <exclude>bootstrap.properties</exclude>
-                        </excludes>
-                    </resource>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-                        <includes>
-                            <include>bootstrap-${env}.properties</include>
-                            <include>bootstrap.properties</include>
-                        </includes>
-                    </resource>
-                </resources>-->
+                <!--        <resources>
+                            <resource>
+                                <directory>src/main/resources</directory>
+                                <filtering>true</filtering>
+                                <excludes>
+                                    <exclude>bootstrap-test.properties</exclude>
+                                    <exclude>bootstrap-dev.properties</exclude>
+                                    <exclude>bootstrap-pro.properties</exclude>
+                                    <exclude>bootstrap.properties</exclude>
+                                </excludes>
+                            </resource>
+                            <resource>
+                                <directory>src/main/resources</directory>
+                                <filtering>true</filtering>
+                                <includes>
+                                    <include>bootstrap-${env}.properties</include>
+                                    <include>bootstrap.properties</include>
+                                </includes>
+                            </resource>
+                        </resources>-->
 
         <plugins>
             <plugin>

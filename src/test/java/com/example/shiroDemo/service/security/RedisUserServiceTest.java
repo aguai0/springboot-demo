@@ -10,10 +10,10 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Resource;
 import java.util.List;
 
-public class UserServiceTest extends BaseTest {
+public class RedisUserServiceTest extends BaseTest {
 
     /** 日志记录器 */
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RedisUserServiceTest.class);
 
     @Resource
     private UserService userService;

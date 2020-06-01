@@ -26,7 +26,7 @@ public class ApplicationExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.OK)
-    public Result handleRuntimeException(RuntimeException e){
+    public Result handleRuntimeException(RuntimeException e)throws RuntimeException{
         LOGGER.error("出错了",e);
         return new FailResult();
     }

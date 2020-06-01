@@ -3,8 +3,15 @@ package com.example.annotation.simple.configuration;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SpringConfigurationApplication {
+
+    public static ApplicationContext context;
+    public  void initApplicationContext(ApplicationContext context){
+         context = context;
+    }
 
     public static void main(String[] args) {
      /*
